@@ -99,8 +99,8 @@ public:
     Estudiante estudiante1("Chahla", 19, "Primero");
     estudiante1.mostrar_info();
     estudiante1.registrar_materia("Matematicas");
-    estudiante1.registrar_materia("Ciencias");
-    estudiante1.registrar_materia("Historia");
+    estudiante1.registrar_materia("Programacion");
+    estudiante1.registrar_materia("Fisica");
     estudiante1.mostrar_materias();
     cout<<"\nLos valores originales son x = "<<x<<" e y = "<<y<<endl;
     intercambiar_valores(&x, &y);
@@ -123,14 +123,18 @@ public:
     cout << "\nRegistro 2:" << endl;
     registro2.mostrar_asistencia();
         vector<Estudiante> lista_estudiantes = {
-                Estudiante("Chahla", 15, "Primero"),
-                Estudiante("María", 14, "Segundo"),
-                Estudiante("Lisa", 16, "Primero"),
-                Estudiante("Oihana", 13, "Primero"),
-                Estudiante("Dina", 15, "Segundo")
+                Estudiante("Chahla", 19, "Primero"),
+                Estudiante("María", 19, "Segundo"),
+                Estudiante("Lisa", 18, "Primero"),
+                Estudiante("Oihana", 18, "Primero"),
+                Estudiante("Dina", 19, "Segundo")
         };
         string grado_a_filtrar = "Primero";
         vector<Estudiante> estudiantes_filtrados = filtrar_por_grado(lista_estudiantes, grado_a_filtrar);
+        cout << "Estudiantes de " << grado_a_filtrar << ":\n";
+        for (Estudiante estudiante : estudiantes_filtrados) {
+            estudiante.mostrar_info();
+        }
 
 
 

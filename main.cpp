@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int a, b, suma;
+
 class Estudiante {
 private:
     string nombre;
@@ -19,9 +19,17 @@ public:
         std::cout << "\nGrado: " << grado << std::endl;
     }
 };
+void intercambiar_valores(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 
 
 int main() {
+    int a, b, suma;
+    int x = 5, y = 10;
 
     cout<<"Ingrese un valor para a: "<<endl;
     cin>>a;
@@ -31,7 +39,9 @@ int main() {
     cout<<"\nLa suma de los valores es: "<<suma<<endl;
     Estudiante estudiante1("Chahla", 19, "Primero de carrera");
     estudiante1.mostrar_info();
-
+    cout<<"\nLos valores originales son x = "<<x<<" e y = "<<y<<endl;
+    intercambiar_valores(&x, &y);
+    cout<<"\nLos valores intercambiados son x = "<<x<<" e y = "<< y <<endl;
 
 
 

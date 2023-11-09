@@ -6,6 +6,14 @@
 using namespace std;
 
 
+class ExcepcionGradoInvalido : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Error: Grado no valido.";
+    }
+};
+
+
 class Estudiante {
 private:
     string nombre;
@@ -14,7 +22,13 @@ private:
     vector<string> materias;
 
 public:
-    Estudiante(string n, int e, string g) : nombre(n), edad(e), grado(g) {}
+    Estudiante(string n, int e, string g) : nombre(n), edad(e), grado(g) {
+        if (g == "Primero" || g == "Segundo" || g == "Tercero") {
+            grado = g;
+        } else {
+            throw ExcepcionGradoInvalido();
+        }
+    }
     string obtener_grado() const {
         return grado;
     }
@@ -35,6 +49,7 @@ public:
             cout << " - " << materia << endl;
         }
     }
+
 };
 vector<Estudiante> filtrar_por_grado(const vector<Estudiante>& estudiantes, const string& grado) {
     vector<Estudiante> estudiantes_filtrados;
@@ -55,7 +70,7 @@ void intercambiar_valores(int* a, int* b) {
 
 double calcular_promedio(const vector<int>& calificaciones) {
     if (calificaciones.empty()) {
-        cerr << "Error: La lista de calificaciones está vacía." << endl;
+        cerr << "Error: La lista de calificaciones esta vacia." << endl;
         return 0.0;
     }
     int suma1 = 0;
@@ -84,6 +99,7 @@ public:
 
     }
 };
+
 
 
     int main() {
@@ -124,7 +140,7 @@ public:
     registro2.mostrar_asistencia();
         vector<Estudiante> lista_estudiantes = {
                 Estudiante("Chahla", 19, "Primero"),
-                Estudiante("María", 19, "Segundo"),
+                Estudiante("Maria", 19, "Segundo"),
                 Estudiante("Lisa", 18, "Primero"),
                 Estudiante("Oihana", 18, "Primero"),
                 Estudiante("Dina", 19, "Segundo")
@@ -134,6 +150,13 @@ public:
         cout << "Estudiantes de " << grado_a_filtrar << ":\n";
         for (Estudiante estudiante : estudiantes_filtrados) {
             estudiante.mostrar_info();
+        }
+        try {
+
+            Estudiante estudiante1("Juan", 15, "Cuarto");
+            estudiante1.mostrar_info();
+        } catch (const ExcepcionGradoInvalido& e) {
+            std::cerr << "Excepcion capturada: " << e.what() << std::endl;
         }
 
 

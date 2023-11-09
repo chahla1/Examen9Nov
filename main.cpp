@@ -99,6 +99,23 @@ public:
 
     }
 };
+class Profesor{
+private:
+    string nombre;
+    int edad;
+    string materiaQueImparte;
+    int aniosDeExperiencia;
+public:
+    Profesor(string n, int e, string materia, int experiencia)
+            : nombre(n), edad(e), materiaQueImparte(materia), aniosDeExperiencia(experiencia) {}
+
+    void mostrar_info_profesor() const {
+        cout << "Nombre del profesor: " << nombre << endl;
+        cout << "Edad: " << edad << " anios" << endl;
+        cout << "Materia que imparte: " << materiaQueImparte << endl;
+        cout << "Anios de experiencia: " << aniosDeExperiencia << " anios" << endl;
+    }
+};
 
 
 
@@ -161,6 +178,10 @@ public:
             std::cerr << "Excepcion capturada: " << e.what() << std::endl;
         }
         estudiante1.mostrar_materias();
+        Profesor profesor1("Manuel", 40, "Fisisca", 15);
+        profesor1.mostrar_info_profesor();
+
+        return 0;
 
 
 

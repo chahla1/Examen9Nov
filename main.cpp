@@ -39,6 +39,19 @@ void intercambiar_valores(int* a, int* b) {
     *a = *b;
     *b = temp;
 }
+
+double calcular_promedio(const vector<int>& calificaciones) {
+    if (calificaciones.empty()) {
+        cerr << "Error: La lista de calificaciones está vacía." << endl;
+        return 0.0;
+    }
+    int suma1 = 0;
+    for (int calificacion: calificaciones) {
+        suma1 += calificacion;
+    }
+    return static_cast<double>(suma1) / calificaciones.size();
+}
+
 int dividir(int a, int b) {
     if (b == 0) {
         throw invalid_argument("Error: Division por cero.");
@@ -46,9 +59,21 @@ int dividir(int a, int b) {
     return a / b;
 }
 
+class RegistroAsistencia{
+private:
+    string fecha;
+    string estado;
+public:
+    RegistroAsistencia(const string& fecha, const string& estado): fecha(fecha), estado(estado){}
+    void mostrar_asistencia(){
+        cout<<"Fecha: "<<fecha<<endl;
+        cout<<"Estado de asistencia: "<<estado<<endl;
+
+    }
+};
 
 
-int main() {
+    int main() {
     int a, b, suma;
     int x = 5, y = 10;
 
@@ -60,22 +85,37 @@ int main() {
     cout<<"\nLa suma de los valores es: "<<suma<<endl;
     Estudiante estudiante1("Chahla", 19, "Primero de carrera");
     estudiante1.mostrar_info();
-    estudiante1.registrar_materia("Matemáticas");
+    estudiante1.registrar_materia("Matematicas");
     estudiante1.registrar_materia("Ciencias");
     estudiante1.registrar_materia("Historia");
+    estudiante1.mostrar_materias();
     cout<<"\nLos valores originales son x = "<<x<<" e y = "<<y<<endl;
     intercambiar_valores(&x, &y);
     cout<<"\nLos valores intercambiados son x = "<<x<<" e y = "<< y <<endl;
+        vector<int> calificaciones = {5, 8, 7, 9, 6};
+        double promedio = calcular_promedio(calificaciones);
+        cout<<"\nEl promedio de calificaciones es: "<<promedio<<endl;
     try{
         int resultado = dividir(20,5);
         cout<<"\nEl resultado de la division es: "<< resultado<<endl;
         resultado = dividir(10, 0);
         cout<<"\nEste mennsaje no se imprimira"<<endl;
     }catch(const exception& e){
-        cerr<<"Se captura la excepcion"<< e.what()<<endl;
+        cerr<<"\nSe captura la excepcion, "<< e.what()<<endl;
     }
-    estudiante1.mostrar_info();
-    estudiante1.mostrar_materias();
+    RegistroAsistencia registro1("08/11/2023", "Ha Asistido");
+    RegistroAsistencia registro2("09/11/2023", "Ha Faltado");
+    cout<<"Primer registro: "<<endl;
+    registro1.mostrar_asistencia();
+    cout << "\nRegistro 2:" << endl;
+    registro2.mostrar_asistencia();
+
+
+
+
+
+
+
 
 
 

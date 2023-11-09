@@ -2,14 +2,15 @@
 #include <string>
 #include <stdexcept>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 
-class ExcepcionGradoInvalido : public std::exception {
+class MateriaYaRegistradaException : public exception {
 public:
     const char* what() const noexcept override {
-        return "Error: Grado no valido.";
+        return "Error: La materia ya ha sido registrada.";
     }
 };
 
@@ -22,13 +23,15 @@ private:
     vector<string> materias;
 
 public:
-    Estudiante(string n, int e, string g) : nombre(n), edad(e), grado(g) {
-        if (g == "Primero" || g == "Segundo" || g == "Tercero") {
-            grado = g;
-        } else {
-            throw ExcepcionGradoInvalido();
+
+    void registrar_materia(const string &materia) {
+        if (std::find(materias.begin(), materias.end(), materia) != materias.end()) {
+            throw MateriaYaRegistradaException();
         }
+        materias.push_back(materia);
     }
+    Estudiante(string n, int e, string g) : nombre(n), edad(e), grado(g) {}
+
     string obtener_grado() const {
         return grado;
     }
@@ -39,9 +42,6 @@ public:
         std::cout << "\nGrado: " << grado << std::endl;
     }
 
-    void registrar_materia(const string &materia) {
-        materias.push_back(materia);
-    }
 
     void mostrar_materias() {
         cout << "\nMaterias registradas: " << endl;
@@ -151,18 +151,16 @@ public:
         for (Estudiante estudiante : estudiantes_filtrados) {
             estudiante.mostrar_info();
         }
+
         try {
 
-            Estudiante estudiante1("Juan", 15, "Cuarto");
-            estudiante1.mostrar_info();
-        } catch (const ExcepcionGradoInvalido& e) {
+            estudiante1.registrar_materia("Matematicas");
+            estudiante1.registrar_materia("Programacion");
+            estudiante1.registrar_materia("Matematicas");
+        } catch (const MateriaYaRegistradaException& e) {
             std::cerr << "Excepcion capturada: " << e.what() << std::endl;
         }
-
-
-
-
-
+        estudiante1.mostrar_materias();
 
 
 

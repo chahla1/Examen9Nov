@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <vector>
 
 using namespace std;
 
@@ -10,6 +11,7 @@ private:
     string nombre;
     int edad;
     string grado;
+    vector<string> materias;
 
 public:
     Estudiante(string n, int e, string g) : nombre(n), edad(e), grado(g) {}
@@ -19,7 +21,19 @@ public:
         std::cout << "\nEdad: " << edad << std::endl;
         std::cout << "\nGrado: " << grado << std::endl;
     }
+
+    void registrar_materia(const string &materia) {
+        materias.push_back(materia);
+    }
+
+    void mostrar_materias() {
+        cout << "\nMaterias registradas: " << endl;
+        for (const auto &materia: materias) {
+            cout << " - " << materia << endl;
+        }
+    }
 };
+
 void intercambiar_valores(int* a, int* b) {
     int temp = *a;
     *a = *b;
@@ -46,6 +60,9 @@ int main() {
     cout<<"\nLa suma de los valores es: "<<suma<<endl;
     Estudiante estudiante1("Chahla", 19, "Primero de carrera");
     estudiante1.mostrar_info();
+    estudiante1.registrar_materia("Matemáticas");
+    estudiante1.registrar_materia("Ciencias");
+    estudiante1.registrar_materia("Historia");
     cout<<"\nLos valores originales son x = "<<x<<" e y = "<<y<<endl;
     intercambiar_valores(&x, &y);
     cout<<"\nLos valores intercambiados son x = "<<x<<" e y = "<< y <<endl;
@@ -57,6 +74,9 @@ int main() {
     }catch(const exception& e){
         cerr<<"Se captura la excepcion"<< e.what()<<endl;
     }
+    estudiante1.mostrar_info();
+    estudiante1.mostrar_materias();
+
 
 
 

@@ -15,6 +15,9 @@ private:
 
 public:
     Estudiante(string n, int e, string g) : nombre(n), edad(e), grado(g) {}
+    string obtener_grado() const {
+        return grado;
+    }
 
     void mostrar_info() {
         std::cout << "\nNombre: " << nombre << std::endl;
@@ -33,6 +36,16 @@ public:
         }
     }
 };
+vector<Estudiante> filtrar_por_grado(const vector<Estudiante>& estudiantes, const string& grado) {
+    vector<Estudiante> estudiantes_filtrados;
+
+    for (const Estudiante &estudiante: estudiantes) {
+        if (estudiante.obtener_grado() == grado) {
+            estudiantes_filtrados.push_back(estudiante);
+        }
+    }
+    return estudiantes_filtrados;
+}
 
 void intercambiar_valores(int* a, int* b) {
     int temp = *a;
@@ -83,7 +96,7 @@ public:
     cin>>b;
     suma = a + b;
     cout<<"\nLa suma de los valores es: "<<suma<<endl;
-    Estudiante estudiante1("Chahla", 19, "Primero de carrera");
+    Estudiante estudiante1("Chahla", 19, "Primero");
     estudiante1.mostrar_info();
     estudiante1.registrar_materia("Matematicas");
     estudiante1.registrar_materia("Ciencias");
@@ -109,6 +122,15 @@ public:
     registro1.mostrar_asistencia();
     cout << "\nRegistro 2:" << endl;
     registro2.mostrar_asistencia();
+        vector<Estudiante> lista_estudiantes = {
+                Estudiante("Chahla", 15, "Primero"),
+                Estudiante("María", 14, "Segundo"),
+                Estudiante("Lisa", 16, "Primero"),
+                Estudiante("Oihana", 13, "Primero"),
+                Estudiante("Dina", 15, "Segundo")
+        };
+        string grado_a_filtrar = "Primero";
+        vector<Estudiante> estudiantes_filtrados = filtrar_por_grado(lista_estudiantes, grado_a_filtrar);
 
 
 
@@ -121,6 +143,7 @@ public:
 
 
 
-    return 0;
+
+        return 0;
 
 }
